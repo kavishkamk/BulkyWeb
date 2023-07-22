@@ -24,7 +24,8 @@ namespace BulkyWebRazer_Temp.Pages.Categories
         {
             _db.Categories.Add(category);
             _db.SaveChanges();
-            return RedirectToPage("Index");
+			TempData["success"] = "Category Created Successfully";
+			return RedirectToPage("Index");
         }
     }
 }

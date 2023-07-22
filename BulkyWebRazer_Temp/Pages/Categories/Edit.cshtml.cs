@@ -30,6 +30,7 @@ namespace BulkyWebRazer_Temp.Pages.Categories
             {
 				_db.Categories.Update(Category);
 				_db.SaveChanges();
+                TempData["success"] = "Category Edited Successfully";
 				return RedirectToPage("Index");
 			}
             return Page();

@@ -29,7 +29,8 @@ namespace BulkyWebRazer_Temp.Pages.Categories
         {
             _db.Categories.Remove(category);
             _db.SaveChanges();
-            return RedirectToPage("Index");
+			TempData["success"] = "Category Deleted Successfully";
+			return RedirectToPage("Index");
         }
     }
 }
