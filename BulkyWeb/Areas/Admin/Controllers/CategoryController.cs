@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 using Bulky.DataAccess.Repository.IRepository;
 
-namespace BulkyWeb.Controllers
+namespace BulkyWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
 
@@ -13,7 +14,7 @@ namespace BulkyWeb.Controllers
 
         public CategoryController(ICategoryRepository categoryRepository)
         {
-           _categoryRepository = categoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
@@ -42,11 +43,11 @@ namespace BulkyWeb.Controllers
                 _categoryRepository.Add(category);
                 _categoryRepository.Save();
                 TempData["success"] = "Category Created Successfully";
-				return RedirectToAction("Index");
-			}
+                return RedirectToAction("Index");
+            }
 
             return View();
-           
+
         }
 
         public IActionResult Edit(int? categoryId)
@@ -76,11 +77,11 @@ namespace BulkyWeb.Controllers
             {
                 _categoryRepository.Update(obj);
                 _categoryRepository.Save();
-				TempData["success"] = "Category Updated Successfully";
-				return RedirectToAction("Index");
+                TempData["success"] = "Category Updated Successfully";
+                return RedirectToAction("Index");
             }
 
-            return View() ;
+            return View();
         }
 
         public IActionResult Delete(int? categoryId)
@@ -110,16 +111,16 @@ namespace BulkyWeb.Controllers
 
             Category? categoryFromDb = _categoryRepository.Get(u => u.CategoryId == categoryId);
 
-			if (categoryFromDb == null)
+            if (categoryFromDb == null)
             {
                 return NotFound();
             }
 
             _categoryRepository.Delete(categoryFromDb);
             _categoryRepository.Save();
-			TempData["success"] = "Category Deleted Successfully";
+            TempData["success"] = "Category Deleted Successfully";
 
-			return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }
