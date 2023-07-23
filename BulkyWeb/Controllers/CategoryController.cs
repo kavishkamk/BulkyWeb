@@ -2,22 +2,24 @@
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 
+using Bulky.DataAccess.Repository.IRepository;
+
 namespace BulkyWeb.Controllers
 {
     public class CategoryController : Controller
     {
 
-        private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(ApplicationDbContext db)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            _db = db;
+           _categoryRepository = categoryRepository;
         }
 
         public IActionResult Index()
         {
 
-            List<Category> categories = _db.Categories.ToList<Category>();
+            List<Category> categories = _categoryRepository.GetAll();
 
             return View(categories);
         }
@@ -37,8 +39,8 @@ namespace BulkyWeb.Controllers
 
             if (ModelState.IsValid)
             {
-				_db.Categories.Add(category);
-				_db.SaveChanges();
+                _categoryRepository.Add(category);
+                _categoryRepository.Save();
                 TempData["success"] = "Category Created Successfully";
 				return RedirectToAction("Index");
 			}
@@ -55,8 +57,8 @@ namespace BulkyWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _db.Categories.Find(categoryId);
-            //Category? categoryFromDB1 = _db.Categories.FirstOrDefault(u => u.CategoryId == categoryId);
+            //Category? categoryFromDb = _db.Categories.Find(categoryId);
+            Category? categoryFromDb = _categoryRepository.Get(u => u.CategoryId == categoryId);
             //Category? categoryFromDB2 = _db.Categories.Where(u => u.CategoryId == categoryId).FirstOrDefault();
 
             if (categoryFromDb == null)
@@ -72,8 +74,8 @@ namespace BulkyWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _categoryRepository.Update(obj);
+                _categoryRepository.Save();
 				TempData["success"] = "Category Updated Successfully";
 				return RedirectToAction("Index");
             }
@@ -88,7 +90,7 @@ namespace BulkyWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDB = _db.Categories.Find(categoryId);
+            Category? categoryFromDB = _categoryRepository.Get(u => u.CategoryId == categoryId);
 
             if (categoryFromDB == null)
             {
@@ -106,15 +108,15 @@ namespace BulkyWeb.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _db.Categories.Find(categoryId);
+            Category? categoryFromDb = _categoryRepository.Get(u => u.CategoryId == categoryId);
 
-            if (categoryFromDb == null)
+			if (categoryFromDb == null)
             {
                 return NotFound();
             }
 
-            _db.Categories.Remove(categoryFromDb);
-            _db.SaveChanges();
+            _categoryRepository.Delete(categoryFromDb);
+            _categoryRepository.Save();
 			TempData["success"] = "Category Deleted Successfully";
 
 			return RedirectToAction("Index");
