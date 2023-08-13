@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Bulky.Models
 {
@@ -12,12 +14,12 @@ namespace Bulky.Models
 		[Key]
 		public int Id { get; set; }
 		[Required]
-		public required string Title { get; set; }
+		public string Title { get; set; }
 		public string? Description { get; set; }
 		[Required]
-		public required string ISBN { get; set; }
+		public string ISBN { get; set; }
 		[Required]
-		public required string Author { get; set; }
+		public string Author { get; set; }
 		[Required]
 		[Display(Name = "List Price")]
 		[Range(1, 1000, ErrorMessage = "should be 1 and 1000")]
@@ -34,5 +36,12 @@ namespace Bulky.Models
 		[Display(Name = "Price for 100+")]
 		[Range(1, 1000, ErrorMessage = "should be 1 and 1000")]
 		public double ListPrice100 { get; set; }
+		
+		public int CategoryId { get; set; }
+		[ForeignKey("CategoryId")]
+		[ValidateNever]
+		public Category Category { get; set; }
+		[ValidateNever]
+		public string ImageUrl { get; set; }
 	}
 }

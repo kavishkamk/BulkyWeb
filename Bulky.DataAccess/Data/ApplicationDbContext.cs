@@ -33,7 +33,9 @@ namespace Bulky.DataAccess.Data
 					ListPrice = 99,
 					Price = 90,
 					ListPrice50 = 85,
-					ListPrice100 = 80
+					ListPrice100 = 80,
+					CategoryId = 2,
+					ImageUrl = ""
 				},
 				new Product
 				{
@@ -45,7 +47,9 @@ namespace Bulky.DataAccess.Data
 					ListPrice = 40,
 					Price = 30,
 					ListPrice50 = 25,
-					ListPrice100 = 20
+					ListPrice100 = 20,
+					CategoryId = 1,
+					ImageUrl = ""
 				},
 				new Product
 				{
@@ -57,7 +61,9 @@ namespace Bulky.DataAccess.Data
 					ListPrice = 55,
 					Price = 50,
 					ListPrice50 = 40,
-					ListPrice100 = 35
+					ListPrice100 = 35,
+					CategoryId = 2,
+					ImageUrl = ""
 				},
 				new Product
 				{
@@ -69,7 +75,9 @@ namespace Bulky.DataAccess.Data
 					ListPrice = 70,
 					Price = 65,
 					ListPrice50 = 60,
-					ListPrice100 = 55
+					ListPrice100 = 55,
+					CategoryId = 1,
+					ImageUrl = ""
 				},
 				new Product
 				{
@@ -81,7 +89,9 @@ namespace Bulky.DataAccess.Data
 					ListPrice = 30,
 					Price = 27,
 					ListPrice50 = 25,
-					ListPrice100 = 20
+					ListPrice100 = 20,
+					CategoryId = 2,
+					ImageUrl = ""
 				},
 				new Product
 				{
@@ -93,7 +103,9 @@ namespace Bulky.DataAccess.Data
 					ListPrice = 25,
 					Price = 23,
 					ListPrice50 = 22,
-					ListPrice100 = 20
+					ListPrice100 = 20,
+					CategoryId = 3,
+					ImageUrl = ""
 				}
 			);
 		}
